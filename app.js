@@ -25,7 +25,7 @@ const upload = multer({
 
 
 app.post('/public/uploads', upload.single('myFile'), function (req, res, next) {
-    res.send(`<h2>Successful Upload!</h2> <a href="http://localhost:3000">Back</a>`)
+    res.render('uploads')
 })
 
 
