@@ -1,6 +1,7 @@
 const express = require("express")
 const multer = require("multer");
 const fs = require("fs");
+const path = require("path")
 
 const publicPath = 'public/';
 const uploadPath = './public/uploads';
@@ -9,7 +10,13 @@ const port = 3000;
 
 const app = express();
 
+const photoObject = {
+    photoArray: []
+}
+
 app.set('view engine', 'pug')
+// app.set('view options', { layout: false })
+app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static(publicPath));
 const upload = multer({
@@ -20,9 +27,9 @@ const upload = multer({
 app.post('/public/uploads', upload.single('myFile'), function (req, res, next) {
     res.send(`<h2>Successful Upload!</h2> <a href="http://localhost:3000">Back</a>`)
 })
-const photoObject = {
-    photoArray: []
-}
+
+
+
 app.get("/", (req, res) => {
     fs.readdir(uploadPath, (err, items) => {
         
